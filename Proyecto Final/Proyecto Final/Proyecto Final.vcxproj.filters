@@ -27,6 +27,9 @@
     <ClCompile Include="Empleados.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Clientes.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConexionBD.h">
@@ -36,6 +39,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Empleados.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Clientes.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

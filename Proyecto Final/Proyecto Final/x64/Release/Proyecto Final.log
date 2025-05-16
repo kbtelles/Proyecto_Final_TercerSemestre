@@ -1,10 +1,13 @@
 ﻿  Proyecto Final.cpp
-C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Empleados.h(84,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO FINAL\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Empleados.h(84,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Proyecto%20Final.cpp")
+  
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO FINAL\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Clientes.h(55,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
   Generando código
-  145 of 171 functions (84.8%) were compiled, the rest were copied from previous compilation.
-    9 functions were new in current compilation
-    6 functions had inline decision re-evaluated but remain unchanged
+  1 of 188 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Proyecto Final.vcxproj -> C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\x64\Release\Proyecto Final.exe
+  Proyecto Final.vcxproj -> C:\Users\gmayl\OneDrive\Desktop\PROYECTO FINAL\Proyecto_Final_TercerSemestre\Proyecto Final\x64\Release\Proyecto Final.exe
