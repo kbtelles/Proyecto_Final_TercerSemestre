@@ -1,30 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\",
+  "WorkspaceRootPath": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Proyecto Final.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\proveedor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\proveedor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Proyecto Final.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\Proyecto Final.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Clientes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\Clientes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Empleados.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\Empleados.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\Puestos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\Puestos.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\ConexionBD.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\ConexionBD.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A68E5C7E-E287-436C-8110-F106C037F609}|Proyecto Final\\Proyecto Final.vcxproj|solutionrelative:Proyecto Final\\Puestos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,51 +26,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Clientes.h",
-              "DocumentMoniker": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Clientes.h",
-              "RelativeDocumentMoniker": "Proyecto Final\\Clientes.h",
-              "ToolTip": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Clientes.h",
-              "RelativeToolTip": "Proyecto Final\\Clientes.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "proveedor.h",
+              "DocumentMoniker": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\proveedor.h",
+              "RelativeDocumentMoniker": "Proyecto Final\\proveedor.h",
+              "ToolTip": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\proveedor.h",
+              "RelativeToolTip": "Proyecto Final\\proveedor.h",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAEwAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-16T02:15:31.575Z"
+              "WhenOpened": "2025-05-17T06:05:16.055Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ConexionBD.h",
-              "DocumentMoniker": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\ConexionBD.h",
-              "RelativeDocumentMoniker": "Proyecto Final\\ConexionBD.h",
-              "ToolTip": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\ConexionBD.h",
-              "RelativeToolTip": "Proyecto Final\\ConexionBD.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-15T00:14:50.987Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Puestos.cpp",
-              "DocumentMoniker": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.cpp",
+              "DocumentMoniker": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.cpp",
               "RelativeDocumentMoniker": "Proyecto Final\\Puestos.cpp",
-              "ToolTip": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.cpp",
+              "ToolTip": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.cpp",
               "RelativeToolTip": "Proyecto Final\\Puestos.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-14T22:13:39.269Z"
+              "WhenOpened": "2025-05-14T22:13:39.269Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Puestos.h",
-              "DocumentMoniker": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.h",
+              "DocumentMoniker": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.h",
               "RelativeDocumentMoniker": "Proyecto Final\\Puestos.h",
-              "ToolTip": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.h",
+              "ToolTip": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Puestos.h",
               "RelativeToolTip": "Proyecto Final\\Puestos.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -86,25 +68,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Empleados.h",
-              "DocumentMoniker": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Empleados.h",
-              "RelativeDocumentMoniker": "Proyecto Final\\Empleados.h",
-              "ToolTip": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Empleados.h",
-              "RelativeToolTip": "Proyecto Final\\Empleados.h",
-              "ViewState": "AgIAALIAAAAAAAAAAAAiwLoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-15T00:30:06.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Proyecto Final.cpp",
-              "DocumentMoniker": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Proyecto Final.cpp",
+              "DocumentMoniker": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Proyecto Final.cpp",
               "RelativeDocumentMoniker": "Proyecto Final\\Proyecto Final.cpp",
-              "ToolTip": "C:\\Users\\gmayl\\OneDrive\\Desktop\\PROYECTO FINAL\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Proyecto Final.cpp",
+              "ToolTip": "C:\\Users\\alexh\\Desktop\\Proyecto_Final_TercerSemestre\\Proyecto Final\\Proyecto Final\\Proyecto Final.cpp",
               "RelativeToolTip": "Proyecto Final\\Proyecto Final.cpp",
-              "ViewState": "AgIAAJ8AAAAAAAAAAAAjwKEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAQAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-14T16:56:37.084Z",
               "EditorCaption": ""
