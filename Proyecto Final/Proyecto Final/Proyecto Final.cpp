@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Empleados.h"
 #include "Clientes.h"
+#include "Proveedor.h"
 
 using namespace std;
 
@@ -158,12 +159,70 @@ void menuClientes() {
     } while (opcion != 5);
 }
 
+void menuProveedores() {
+    Proveedores p;
+    int opcion = 0;
+
+    do {
+        cout << "\n--- Menu Proveedores ---\n";
+        cout << "1. Crear\n2. Leer\n3. Actualizar\n4. Borrar\n5. Salir\n";
+        cout << "Ingrese una opcion: ";
+        cin >> opcion;
+        cin.ignore();
+
+        switch (opcion) {
+        case 1: {
+            string proveedor, nit, direccion, telefono;
+            cout << "Proveedor: "; getline(cin, proveedor);
+            cout << "NIT: "; getline(cin, nit);
+            cout << "Direccion: "; getline(cin, direccion);
+            cout << "Telefono: "; getline(cin, telefono);
+
+            p = Proveedores(0, proveedor, nit, direccion, telefono);
+            p.crear();
+            break;
+        }
+        case 2:
+            p.leer();
+            break;
+        case 3: {
+            int id;
+            string proveedor, nit, direccion, telefono;
+            cout << "ID del proveedor a actualizar: "; cin >> id; cin.ignore();
+            cout << "Proveedor: "; getline(cin, proveedor);
+            cout << "NIT: "; getline(cin, nit);
+            cout << "Direccion: "; getline(cin, direccion);
+            cout << "Telefono: "; getline(cin, telefono);
+
+            p.setIdProveedor(id);
+            p.setProveedor(proveedor);
+            p.setNIT(nit);
+            p.setDireccion(direccion);
+            p.setTelefono(telefono);
+            p.actualizar();
+            break;
+        }
+        case 4: {
+            int id;
+            cout << "ID del proveedor a eliminar: "; cin >> id; cin.ignore();
+            p.setIdProveedor(id);
+            p.borrar();
+            break;
+        }
+        case 5:
+            cout << "Saliendo del menu de proveedores...\n";
+            break;
+        default:
+            cout << "Opcion invalida\n";
+        }
+    } while (opcion != 5);
+}
 
 int main() {
     int opcionPrincipal = 0;
     do {
         cout << "\n--- Menu Principal ---\n";
-        cout << "1. Empleados\n2. Clientes\n3. Productos (pendiente)\n4. Salir\n";
+        cout << "1. Empleados\n2. Clientes\n3. Proveedores\n4. Productos (pendiente)\n5. Salir\n";
         cout << "Seleccione una opcion: ";
         cin >> opcionPrincipal;
         cin.ignore();
@@ -176,15 +235,18 @@ int main() {
             menuClientes();
             break;
         case 3:
-            cout << "Modulo Productos en desarrollo\n";
+            menuProveedores();
             break;
         case 4:
+            cout << "Modulo Productos en desarrollo\n";
+            break;
+        case 5:
             cout << "Saliendo del programa...\n";
             break;
         default:
             cout << "Opcion invalida\n";
         }
-    } while (opcionPrincipal != 4);
+    } while (opcionPrincipal != 5);
 
     return 0;
 }
