@@ -1,20 +1,40 @@
-﻿  Proyecto Final.cpp
-  proveedor.cpp
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Empleados.h(84,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+﻿  Clientes.cpp
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Clientes.h(93,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Clientes.cpp")
+  
+  Proyecto Final.cpp
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Puestos.h(45,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Clientes.h(55,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Empleados.h(86,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Proveedor.h(49,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Clientes.h(93,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\proveedor.h(49,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
-  (compilando archivo de origen "proveedor.cpp")
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Proveedor.h(49,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Proyecto%20Final.cpp")
+  
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Productos.h(63,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Proyecto%20Final.cpp")
+  
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\marcas.h(36,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Proyecto%20Final.cpp")
+  
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\ventas.h(102,42): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Proyecto%20Final.cpp")
+  
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Compras.h(32,43): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Proyecto%20Final.cpp")
+  
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Proyecto Final.cpp(26,17): warning C4101: 'idPuestos': variable local sin referencia
+  Ventas.cpp
+C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(102,42): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "Ventas.cpp")
   
   Generando código
-  1 of 202 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  4 of 319 functions ( 1.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    42 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Proyecto Final.vcxproj -> C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\x64\Release\Proyecto Final.exe
+  Proyecto Final.vcxproj -> C:\Users\keite\Desktop\POO\Proyecto Final\Proyecto_Final_TercerSemestre\Proyecto Final\x64\Release\Proyecto Final.exe

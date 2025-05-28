@@ -47,10 +47,10 @@ public:
             if (!q_estado) {
                 cout << "Proveedor agregado exitosamente.\n";
                 int id = mysql_insert_id(cn.getConector());
-                cout << "Nuevo ID asignado: " << id << endl;
+                cout << "ID asignado: " << id << endl;
             }
             else {
-                cout << "Error al insertar proveedor.\n";
+                cout << "Error al insertar proveedor.\n" << mysql_error(cn.getConector());
             }
         }
         else {
@@ -64,7 +64,7 @@ public:
         cn.abrir_conexion();
         MYSQL_ROW fila;
         MYSQL_RES* resultado;
-
+        cout << "________________Datos de los Proveedores__________________\n" << endl;
         if (cn.getConector()) {
             string consulta = "SELECT * FROM proveedores;";
             const char* c = consulta.c_str();
@@ -74,7 +74,7 @@ public:
 
             while ((fila = mysql_fetch_row(resultado))) {
                 cout << "ID: " << fila[0] << ", Proveedor: " << fila[1] << ", NIT: " << fila[2]
-                    << ", Direccion: " << fila[3] << ", Telefono: " << fila[4] << endl;
+                    << ", Direccion: " << fila[3] << ", Telefono: " << fila[4] << "\n-------------------------------------------------------------------" << endl;
             }
         }
         else {

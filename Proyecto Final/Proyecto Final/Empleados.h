@@ -17,8 +17,9 @@ private:
 public:
     Empleados() {}
 
-    Empleados(short id_puesto, string puesto, int id_e, string nom, string ape, string dire, string tel, string dpi, bool g, string fn, string fil, string fi)
+    Empleados(int id_puesto, string puesto, int id_e, string nom, string ape, string dire, string tel, string dpi, bool g, string fn, string fil, string fi)
         : Puestos(id_puesto, puesto) {
+
         IdEmpleado = id_e;
         nombres = nom;
         apellidos = ape;
@@ -64,6 +65,7 @@ public:
 
  
 
+
     // Método crear en Empleados
     void crear() {
         int q_estado = 0;
@@ -74,7 +76,7 @@ public:
 
             string consulta = "INSERT INTO empleados (nombres, apellidos, direccion, telefono, DPI, genero, fecha_nacimiento, idPuesto, fecha_inicio_labores, fechaingreso) VALUES ('"
                 + nombres + "', '" + apellidos + "', '" + direccion + "', '" + telefono + "', '" + DPI + "', "
-                + (genero ? "1" : "0") + ", '" + FechaNacimiento + "', " + idI + ", '" + FechaInicioLabores + "', '" + FechaIngreso + "');";
+                + (genero ? "1" : "0") + ", '" + FechaNacimiento + "', " + idI + ", '" + FechaInicioLabores + "', now());"; 
 
             const char* c = consulta.c_str();
             q_estado = mysql_query(cn.getConector(), c);
@@ -82,15 +84,15 @@ public:
             if (!q_estado) {
                 cout << "Ingreso de datos exitoso .... " << endl;
                 int id = mysql_insert_id(cn.getConector());
-                cout << "Nuevo idEmpleado asignado: " << id << endl;
+                cout << "Id de Empleado asignado: " << id << endl;
             }
             else {
                 cout << "Consulta fallida: " << endl;
-                //mysql_error(cn.getConector())
+                
             }
         }
         else {
-            cout << "Conexion fallida" << endl;
+            cout << "Conexion fallida"  << endl;
         }
         cn.cerrar_conexion();
     }
@@ -104,7 +106,7 @@ public:
         MYSQL_RES* resultado;
         cn.abrir_conexion();
         if (cn.getConector()) {
-            cout << "________________Datos del Empleado__________________" << endl;
+            cout << "________________Datos de los Empleados__________________\n" << endl;
             string consulta = "SELECT e.idEmpleado, e.nombres, e.apellidos, e.direccion, e.telefono, e.DPI, e.genero, e.fecha_nacimiento, e.fecha_inicio_labores, e.fechaingreso, p.puesto "
                 "FROM empleados AS e "
                 "INNER JOIN puestos AS p ON e.idPuesto = p.idPuesto "
@@ -121,9 +123,13 @@ public:
                         // fila[6] es un puntero a char, el primer byte contiene el valor del bit
                         genero = fila[6][0] != 0;
                     }
-                    cout << fila[0] << "," << fila[1] << "," << fila[2] << "," << fila[3] << ","
-                        << fila[4] << "," << fila[5] << "," << (genero ? "Masculino" : "Femenino") << ","
-                        << fila[7] << "," << fila[8] << "," << fila[9] << "," << fila[10] << endl;
+                    cout << "ID: " << fila[0] << ", Nombres: " << fila[1] << ", Apellidos: " << fila[2]
+                        << ", Direccion: " << fila[3] << ", Telefono: " << fila[4]
+                        << ", DPI: " << fila[5] << ", Genero: "<<(genero ? "Masculino" : "Femenino") 
+                        << ", Fecha de Nacimiento: " << fila[7] << ", Puesto: " << fila[8]
+                        << ", Fecha de Inicio de Labores: " << fila[9] << ", Fecha de Ingreso: " << fila[10] << 
+                        "\n-------------------------------------------------------------------" << endl;
+                    
                 }
             }
             else {

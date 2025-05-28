@@ -42,15 +42,18 @@ public:
     int getExistencias() { return existencias; }
     string getFechaIngreso() { return fecha_ingreso; }
 
+
+
   
     void crear() {
         int q_estado;
         ConexionBD cn;
         cn.abrir_conexion();
         if (cn.getConector()) {
-            string consulta = "INSERT INTO productos (producto, idMarca, descripcion, imagen, precio_costo, precio_venta, existencias, fecha_ingreso) VALUES ('"
+            string consulta = "INSERT INTO productos (producto, idMarca, descripcion, imagen, precio_costo, precio_venta, existencia, fecha_ingreso) VALUES ('"
                 + producto + "', " + to_string(idMarca) + ", '" + descripcion + "', '" + imagen + "', " + to_string(precio_costo)
-                + ", " + to_string(precio_venta) + ", " + to_string(existencias) + ", '" + fecha_ingreso + "');";
+                + ", " + to_string(precio_venta) + ", " + to_string(existencias) + ", now());";
+
 
             const char* c = consulta.c_str();
             q_estado = mysql_query(cn.getConector(), c);
@@ -61,7 +64,7 @@ public:
                 cout << "Nuevo ID asignado: " << id << endl;
             }
             else {
-                cout << "Error al insertar producto.\n";
+                cout << "Error al insertar producto.\n" << mysql_error(cn.getConector());
             }
         }
         else {
@@ -76,9 +79,9 @@ public:
         cn.abrir_conexion();
         MYSQL_ROW fila;
         MYSQL_RES* resultado;
-
+        cout << "________________Datos de los Productos__________________\n" << endl;
         if (cn.getConector()) {
-            string consulta = "SELECT p.idProducto, p.producto, m.marca, p.descripcion, p.imagen, p.precio_costo, p.precio_venta, p.existencias, p.fecha_ingreso "
+            string consulta = "SELECT p.idProducto, p.producto, m.marca, p.descripcion, p.imagen, p.precio_costo, p.precio_venta, p.existencia, p.fecha_ingreso "
                 "FROM productos p INNER JOIN marcas m ON p.idMarca = m.idMarca "
                 "ORDER BY p.fecha_ingreso DESC;";
 
@@ -95,7 +98,8 @@ public:
                     << ", Precio Costo: " << fila[5]
                     << ", Precio Venta: " << fila[6]
                     << ", Existencias: " << fila[7]
-                    << ", Fecha Ingreso: " << fila[8] << endl;
+                    << ", Fecha Ingreso: " << fila[8] << 
+                    "\n-------------------------------------------------------------------" << endl;
             }
         }
         else {
@@ -112,7 +116,7 @@ public:
             string idStr = to_string(idProducto);
             string consulta = "UPDATE productos SET producto='" + producto + "', idMarca=" + to_string(idMarca)
                 + ", descripcion='" + descripcion + "', imagen='" + imagen + "', precio_costo=" + to_string(precio_costo)
-                + ", precio_venta=" + to_string(precio_venta) + ", existencias=" + to_string(existencias)
+                + ", precio_venta=" + to_string(precio_venta) + ", existencia=" + to_string(existencias)
                 + ", fecha_ingreso='" + fecha_ingreso + "' WHERE idProducto=" + idStr + ";";
 
             const char* c = consulta.c_str();
@@ -151,3 +155,4 @@ public:
         cn.cerrar_conexion();
     }
 };
+

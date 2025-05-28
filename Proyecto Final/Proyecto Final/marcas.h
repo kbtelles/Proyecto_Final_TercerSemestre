@@ -37,7 +37,7 @@ public:
                 cout << "Nuevo ID asignado: " << id << endl;
             }
             else {
-                cout << "Error al insertar marca.\n";
+                cout << "Error al insertar marca.\n" << mysql_error(cn.getConector());
             }
         }
         else {
@@ -51,7 +51,7 @@ public:
         cn.abrir_conexion();
         MYSQL_ROW fila;
         MYSQL_RES* resultado;
-
+        cout << "________________Datos de las Marcas__________________\n" << endl;
         if (cn.getConector()) {
             string consulta = "SELECT * FROM marcas ORDER BY idMarca;";
             const char* c = consulta.c_str();
@@ -60,7 +60,8 @@ public:
 
             cout << "\n--- Lista de Marcas ---\n";
             while ((fila = mysql_fetch_row(resultado))) {
-                cout << "ID: " << fila[0] << ", Marca: " << fila[1] << endl;
+                cout << "ID: " << fila[0] << ", Marca: " << fila[1] << 
+                    "\n-------------------------------------------------------------------" << endl;
             }
         }
         else {
