@@ -39,13 +39,51 @@ public:
     string getCorreo() { return correo_electronico; }
     string getFechaIngreso() { return fecha_ingreso; }
 
+
+    bool buscarPorNit(const string& nit) {
+        bool encontrado = false;
+        ConexionBD cn;
+        cn.abrir_conexion();
+        if (cn.getConector()) {
+            string consulta = "SELECT * FROM clientes WHERE NIT = '" + nit + "';";
+            const char* c = consulta.c_str();
+            int q_estado = mysql_query(cn.getConector(), c);
+
+            if (!q_estado) {
+                MYSQL_RES* resultado = mysql_store_result(cn.getConector());
+                MYSQL_ROW fila = mysql_fetch_row(resultado);
+                if (fila != nullptr) {
+                    id_Cliente = stoi(fila[0]);
+                    nombres = fila[1];
+                    apellidos = fila[2];
+                    
+                    genero = (fila[4][0] == '1'); 
+                    telefono = fila[5];
+                    correo_electronico = fila[6];
+                    fecha_ingreso = fila[7];
+
+                    encontrado = true;
+                }
+                mysql_free_result(resultado);
+            }
+            else {
+                cout << "Error en la consulta: " << mysql_error(cn.getConector()) << endl;
+            }
+        }
+        cn.cerrar_conexion();
+        return encontrado;
+    }
+
+
+
     void crear() {
         int q_estado;
         ConexionBD cn;
         cn.abrir_conexion();
         if (cn.getConector()) {
             string consulta = "INSERT INTO clientes (nombres, apellidos, NIT, genero, telefono, correo_electronico, fechaingreso) VALUES ('"
-                + nombres + "', '" + apellidos + "', '" + NIT + "', " + (genero ? "1" : "0") + ", '" + telefono + "', '" + correo_electronico + "', '" + fecha_ingreso + "');";
+                + nombres + "', '" + apellidos + "', '" + NIT + "', " + (genero ? "1" : "0") + ", '" + telefono + "', '" + correo_electronico + "', now());";
+
 
             const char* c = consulta.c_str();
             q_estado = mysql_query(cn.getConector(), c);
@@ -53,10 +91,10 @@ public:
             if (!q_estado) {
                 cout << "Cliente agregado exitosamente.\n";
                 int id = mysql_insert_id(cn.getConector());
-                cout << "Nuevo ID asignado: " << id << endl;
+                cout << "ID asignado: " << id << endl;
             }
             else {
-                cout << "Error al insertar cliente.\n";
+                cout << "Error al insertar cliente.\n" << mysql_error(cn.getConector());
             }
         }
         else {
@@ -70,7 +108,7 @@ public:
         cn.abrir_conexion();
         MYSQL_ROW fila;
         MYSQL_RES* resultado;
-
+        cout << "________________Datos de los Clientes__________________\n" << endl;
         if (cn.getConector()) {
             string consulta = "SELECT * FROM clientes ORDER BY fechaingreso DESC;";
             const char* c = consulta.c_str();
@@ -83,7 +121,8 @@ public:
                 cout << "ID: " << fila[0] << ", Nombres: " << fila[1] << ", Apellidos: " << fila[2]
                     << ", NIT: " << fila[3] << ", Genero: " << (gen ? "Masculino" : "Femenino")
                     << ", Telefono: " << fila[5] << ", Correo: " << fila[6]
-                    << ", Fecha Ingreso: " << fila[7] << endl;
+                    << ", Fecha Ingreso: " << fila[7] <<
+                    "\n-------------------------------------------------------------------" << endl;
             }
         }
         else {

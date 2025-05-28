@@ -12,7 +12,7 @@ private:
 public:
 	void abrir_conexion() {
 		conector = mysql_init(0);
-		conector = mysql_real_connect(conector, "localhost", "root", "alexmo_cY2001", "proyecto_final", 3306, NULL, 0);
+		conector = mysql_real_connect(conector, "localhost", "root", "luch6@keily", "proyectofinal", 3306, NULL, 0);
 	}
 
 	MYSQL* getConector() {
