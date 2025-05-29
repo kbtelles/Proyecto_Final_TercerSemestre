@@ -3,13 +3,50 @@
 #include <iostream>
 #include <mysql.h>
 #include <string>
+#include <algorithm>
+#include "Clientes.h"
 
 using namespace std;
 
+inline bool validarNIT(string nit) {
+    // Eliminar espacios y convertir a mayúsculas
+    nit.erase(remove(nit.begin(), nit.end(), ' '), nit.end());
+    transform(nit.begin(), nit.end(), nit.begin(), ::toupper);
+
+    // Casos especiales
+    if (nit == "CF" || nit == "C/F" || nit == "CONSUMIDORFINAL") return true;
+
+    // Eliminar guiones
+    nit.erase(remove(nit.begin(), nit.end(), '-'), nit.end());
+
+    if (nit.length() < 2) return false;
+
+    string cuerpo = nit.substr(0, nit.length() - 1);
+    char verificador = nit.back();
+
+    if (!all_of(cuerpo.begin(), cuerpo.end(), ::isdigit)) return false;
+
+    int factor = cuerpo.length() + 1;
+    int suma = 0;
+
+    for (char c : cuerpo) {
+        suma += (c - '0') * factor;
+        factor--;
+    }
+
+    int modulo = suma % 11;
+    char esperado = (modulo == 10) ? 'K' : (char)('0' + modulo);
+
+    return verificador == esperado;
+}
+
+
 class Ventas {
+
+
 private:
     int idVenta = 0;
-    int noFactura, idCliente, idEmpleado;
+    int noFactura, idCliente, idEmpleado, nitCliente;
     string serie, fechaFactura;
 
 public:
@@ -19,6 +56,7 @@ public:
     void setSerie(string s) { serie = s; }
     void setFechaFactura(string f) { fechaFactura = f; }
     void setIdCliente(int c) { idCliente = c; }
+    void setNitCliente(int nc) { nitCliente = nc; }
     void setIdEmpleado(int e) { idEmpleado = e; }
 
 
@@ -41,13 +79,13 @@ public:
     }
 
     void mostrarClientes(MYSQL* con) {
-        string query = "SELECT idCliente, nombres, apellidos FROM clientes;";
+        string query = "SELECT NIT, nombres, apellidos FROM clientes;";
         if (!mysql_query(con, query.c_str())) {
             MYSQL_RES* res = mysql_store_result(con);
             MYSQL_ROW row;
             cout << "\n----- CLIENTES DISPONIBLES -----\n";
             while ((row = mysql_fetch_row(res))) {
-                cout << "ID: " << row[0] << ", Nombre: " << row[1] << " " << row[2] << endl;
+                cout << "NIT: " << row[0] << ", Nombre: " << row[1] << " " << row[2] << endl;
             }
             mysql_free_result(res);
         }
@@ -81,22 +119,55 @@ public:
 
         if (cn.getConector()) {
             mostrarClientes(cn.getConector());
-            cout << "\nIngrese ID Cliente: ";
-            cin >> idCliente;
+            //cout << "\nIngrese NIT Cliente: ";
+            //cin >> nitCliente;
+
+            string nit;
+            cout << "Ingrese NIT del cliente (o C/F): ";
+            cin >> nit;
+
+            if (!validarNIT(nit)) {
+                cout << "NIT invalido. Operacion cancelada.\n";
+                cn.cerrar_conexion();
+                return;
+            }
+
+            // Verificar si el NIT existe en la tabla de clientes
+            string consultaNIT = "SELECT idCliente FROM clientes WHERE nit = '" + nit + "';";
+            if (mysql_query(cn.getConector(), consultaNIT.c_str())) {
+                cout << "Error al verificar NIT: " << mysql_error(cn.getConector()) << endl;
+                cn.cerrar_conexion();
+                return;
+            }
+
+            MYSQL_RES* resultadoNIT = mysql_store_result(cn.getConector());
+            if (resultadoNIT == nullptr || mysql_num_rows(resultadoNIT) == 0) {
+                cout << "El NIT ingresado no está registrado. Operación cancelada.\n";
+                if (resultadoNIT) mysql_free_result(resultadoNIT);
+                cn.cerrar_conexion();
+                return;
+            }
+            else {
+                MYSQL_ROW fila = mysql_fetch_row(resultadoNIT);
+                nitCliente = stoi(fila[0]);  // Recuperamos idCliente desde la base de datos
+                mysql_free_result(resultadoNIT);
+            }
+
 
             mostrarEmpleados(cn.getConector());
             cout << "\nIngrese ID Empleado: ";
             cin >> idEmpleado;
 
-            setIdCliente(idCliente);
+            setNitCliente(nitCliente);
             setIdEmpleado(idEmpleado);
 
             noFactura = generarNoFactura(cn.getConector());
             serie = generarSerie(noFactura);
 
-            string query = "INSERT INTO ventas(nofactura, serie, fechafactura, idCliente, idEmpleado, fechaingreso) VALUES (" +
+            string query = "INSERT INTO ventas(nofactura, serie, fechafactura, idCliente, idEmpleado, fechaingreso, nit_cliente) VALUES (" +
                 to_string(noFactura) + ", '" + serie + "', now(), " +
-                to_string(idCliente) + ", " + to_string(idEmpleado) + ", now());";
+                to_string(nitCliente) + ", " + to_string(idEmpleado) + ", now(), '" + nit + "');";
+
 
             if (!mysql_query(cn.getConector(), query.c_str())) {
                 idVenta = mysql_insert_id(cn.getConector());
@@ -156,6 +227,55 @@ public:
             cout << "Fallo la conexion a la base de datos.\n";
         }
     }
+
+    void buscarClientePorNitYCrearSiNoExiste() {
+        Clientes cliente;
+        string nit;
+        cout << "Ingrese NIT del cliente: ";
+        getline(cin, nit);
+
+        if (cliente.buscarPorNit(nit)) {
+            cout << "Cliente encontrado:\n";
+            cout << "ID: " << cliente.getIdCliente() << endl;
+            cout << "Nombres: " << cliente.getNombres() << endl;
+            cout << "Apellidos: " << cliente.getApellidos() << endl;
+            cout << "NIT: " << cliente.getNIT() << endl;
+            cout << "Genero: " << (cliente.getGenero() ? "Masculino" : "Femenino") << endl;
+            cout << "Telefono: " << cliente.getTelefono() << endl;
+            cout << "Correo: " << cliente.getCorreo() << endl;
+
+        }
+        else {
+            cout << "Cliente no encontrado. Desea crear uno nuevo? (s/n): ";
+            char opc; cin >> opc; cin.ignore();
+            if (tolower(opc) == 's') {
+                string nombres, apellidos, telefono, correo, nit, fechaIngreso;
+                bool genero;
+
+                cout << "Ingrese nombres: "; getline(cin, nombres);
+                cout << "Ingrese apellidos: "; getline(cin, apellidos);
+                cout << "Ingrese nit: "; getline(cin, nit);
+                cout << "Ingrese genero (1 para masculino, 0 para femenino): "; cin >> genero; cin.ignore();
+                cout << "Ingrese telefono: "; getline(cin, telefono);
+                cout << "Ingrese correo electronico: "; getline(cin, correo);
+
+
+                cliente.setNIT(nit);
+                cliente.setNombres(nombres);
+                cliente.setApellidos(apellidos);
+                cliente.setGenero(genero);
+                cliente.setTelefono(telefono);
+                cliente.setCorreo(correo);
+                cliente.setFechaIngreso(fechaIngreso);
+
+                cliente.crear();
+            }
+            else {
+                cout << "No se creó ningún cliente.\n";
+            }
+        }
+    }
+
 
 
 

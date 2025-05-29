@@ -5,7 +5,7 @@
 #include "Proveedor.h"
 #include "Productos.h"
 #include "marcas.h"
-#include "ventas.h"
+#include "Ventas.h"
 #include "Compras.h"
 
 using namespace std;
@@ -476,7 +476,8 @@ void menuVentas() {
         cout << "2. Leer Ventas\n";
         cout << "3. Actualizar Venta con Detalle\n";
         cout << "4. Eliminar Venta con Detalle\n";
-        cout << "5. Salir\n";
+        cout << "5. Buscar Cliente por NIT\n";
+        cout << "6. Salir\n";
         cout << "Ingrese una opcion: ";
         cin >> opcion;
         cin.ignore();
@@ -501,8 +502,12 @@ void menuVentas() {
             break;
         }
         case 5:
+            venta.buscarClientePorNitYCrearSiNoExiste();
+            break;
+        case 6:
             cout << "Saliendo del menu de ventas...\n";
             break;
+        
         default:
             cout << "Opcion invalida. Intente nuevamente.\n";
         }
@@ -596,11 +601,12 @@ void buscarClientePorNitYCrearSiNoExiste() {
         cout << "Cliente no encontrado. Desea crear uno nuevo? (s/n): ";
         char opc; cin >> opc; cin.ignore();
         if (tolower(opc) == 's') {
-            string nombres, apellidos, telefono, correo, fechaIngreso;
+            string nombres, apellidos, telefono, correo, nit, fechaIngreso;
             bool genero;
 
             cout << "Ingrese nombres: "; getline(cin, nombres);
             cout << "Ingrese apellidos: "; getline(cin, apellidos);
+            cout << "Ingrese nit: "; getline(cin, nit);
             cout << "Ingrese genero (1 para masculino, 0 para femenino): "; cin >> genero; cin.ignore();
             cout << "Ingrese telefono: "; getline(cin, telefono);
             cout << "Ingrese correo electronico: "; getline(cin, correo);
@@ -629,7 +635,7 @@ int main() {
     int opcionPrincipal = 0;
     do {
         cout << "\n--- Menu Principal ---\n";
-        cout << "1. Puestos\n2. Empleados\n3. Clientes\n4. Proveedores\n5. Marcas\n6. Productos\n7. Ventas\n8. Compras\n9.Busqueda de Clientes por medio de NIT\n10. Salir\n";
+        cout << "1. Puestos\n2. Empleados\n3. Clientes\n4. Proveedores\n5. Marcas\n6. Productos\n7. Ventas\n8. Compras\n9. Salir\n";
         cout << "Seleccione una opcion: ";
         cin >> opcionPrincipal;
         cin.ignore();
@@ -660,9 +666,6 @@ int main() {
             menuCompras();
             break;
         case 9:
-            buscarClientePorNitYCrearSiNoExiste();
-            break;
-        case 10:
             cout << "Saliendo del programa...\n";
             break;
         default:

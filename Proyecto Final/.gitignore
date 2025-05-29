@@ -1,0 +1,21 @@
+# Ignorar archivos de Visual Studio
+.vs/
+*.ipch
+*.suo
+*.user
+*.VC.db
+*.obj
+*.log
+*.pch
+*.idb
+*.tlog
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cache
+*.ilk
+*.exe
+*.dll
+*.pdb
+*.db
