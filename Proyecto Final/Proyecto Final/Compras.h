@@ -3,6 +3,7 @@
 #include <iostream>
 #include <mysql.h>
 #include <string>
+#include <iomanip> // Para setw
 
 using namespace std;
 
@@ -19,18 +20,51 @@ public:
     void setIdProveedor(int prov) { idProveedor = prov; }
     void setFechaOrden(string fecha) { fechaOrden = fecha; }
 
+
+    void mostrarProductos(MYSQL* con) {
+        string query = "SELECT idProducto, producto, precio_costo FROM productos;";
+        if (!mysql_query(con, query.c_str())) {
+            MYSQL_RES* res = mysql_store_result(con);
+            MYSQL_ROW row;
+            cout << "\n----- PRODUCTOS DISPONIBLES -----\n";
+            while ((row = mysql_fetch_row(res))) {
+                cout << "ID: " << row[0] << ", Nombre: " << row[1] << ", Costo Unitario: " << row[2] << " " << row[3] << endl;
+            }
+            mysql_free_result(res);
+        }
+        else {
+            cout << "Error al mostrar PRODUCTOS: " << mysql_error(con) << endl;
+        }
+    }
+
+
     // Crear compra con detalles
     void crearCompraConDetalle() {
         ConexionBD cn;
+        
         cn.abrir_conexion();
+       
         if (cn.getConector()) {
+        
+            // Obtener el último número de orden de compra
+            int nuevoOrden = 1;
+            
+            string consultaOrden = "SELECT MAX(no_orden_compra) FROM compras;";
+            if (!mysql_query(cn.getConector(), consultaOrden.c_str())) {
+                MYSQL_RES* res = mysql_store_result(cn.getConector());
+                MYSQL_ROW row = mysql_fetch_row(res);
+                if (row[0] != nullptr) {
+                    nuevoOrden = atoi(row[0]) + 1;
+                }
+                mysql_free_result(res);
+            }
+           
             string query = "INSERT INTO compras(no_orden_compra, idProveedor, fecha_orden, fechaingreso) VALUES (" +
-                to_string(noOrdenCompra) + ", " + to_string(idProveedor) + ", now(), now());";
-
+                to_string(nuevoOrden) + ", " + to_string(idProveedor) + ", now(), now());";
 
             if (!mysql_query(cn.getConector(), query.c_str())) {
                 idCompra = mysql_insert_id(cn.getConector());
-                cout << "\nCompra creada con ID: " << idCompra << endl;
+                cout << "\nCompra creada con ID: " << idCompra << ", Orden No: " << nuevoOrden << endl;
 
                 int cantidadDetalles;
                 cout << "Ingrese la cantidad de productos: ";
@@ -38,11 +72,30 @@ public:
 
                 for (int i = 0; i < cantidadDetalles; i++) {
                     int idProducto, cantidad;
-                    double precio;
-
+                    double precio = 0.0;
+                    mostrarProductos(cn.getConector());
                     cout << "\nID Producto: "; cin >> idProducto;
                     cout << "Cantidad: "; cin >> cantidad;
-                    cout << "Precio Costo Unitario: "; cin >> precio;
+
+                    // Obtener precio_costo desde la tabla productos
+                    string consultaPrecio = "SELECT precio_costo FROM productos WHERE idProducto = " + to_string(idProducto) + " LIMIT 1;";
+                    if (!mysql_query(cn.getConector(), consultaPrecio.c_str())) {
+                        MYSQL_RES* res = mysql_store_result(cn.getConector());
+                        MYSQL_ROW row = mysql_fetch_row(res);
+                        if (row && row[0] != nullptr) {
+                            precio = atof(row[0]);
+                        }
+                        else {
+                            cout << "Producto no encontrado o sin precio. Se omite este detalle.\n";
+                            mysql_free_result(res);
+                            continue;
+                        }
+                        mysql_free_result(res);
+                    }
+                    else {
+                        cout << "Error al obtener precio del producto: " << mysql_error(cn.getConector()) << endl;
+                        continue;
+                    }
 
                     string detalleQuery = "INSERT INTO compras_detalle(idCompra, idProducto, cantidad, precio_costo_unitario) VALUES (" +
                         to_string(idCompra) + ", " + to_string(idProducto) + ", " + to_string(cantidad) + ", " + to_string(precio) + ");";
@@ -54,6 +107,9 @@ public:
                         cout << "Error al insertar detalle: " << mysql_error(cn.getConector()) << endl;
                     }
                 }
+
+                // Imprimir factura al finalizar
+                imprimirFacturaCompra();
             }
             else {
                 cout << "Error al crear compra: " << mysql_error(cn.getConector()) << endl;
@@ -61,7 +117,74 @@ public:
             cn.cerrar_conexion();
         }
         else {
-            cout << "Fallo la conexion a la base de datos.\n";
+            cout << "Fallo la conexión a la base de datos.\n";
+        }
+    }
+
+    // Imprimir factura
+    void imprimirFacturaCompra() {
+        ConexionBD cn;
+        cn.abrir_conexion();
+        MYSQL_ROW fila, filaDetalle;
+        MYSQL_RES* resultado, * resultadoDetalle;
+
+        if (cn.getConector()) {
+            string query =
+                "SELECT c.idCompra, c.no_orden_compra, c.fecha_orden, p.proveedor, p.nit, c.fechaingreso "
+                "FROM compras c "
+                "JOIN proveedores p ON c.idProveedor = p.idProveedor "
+                "WHERE c.idCompra = " + to_string(idCompra) + " LIMIT 1;";
+
+            if (!mysql_query(cn.getConector(), query.c_str())) {
+                resultado = mysql_store_result(cn.getConector());
+                if ((fila = mysql_fetch_row(resultado))) {
+                    cout << "\n============================================\n";
+                    cout << "             FACTURA DE COMPRA              \n";
+                    cout << "============================================\n";
+                    cout << "ID Compra: " << fila[0] << " | Orden: " << fila[1] << endl;
+                    cout << "Fecha Orden: " << fila[2] << endl;
+                    cout << "Proveedor: " << fila[3] << endl;
+                    cout << "NIT Proveedor: " << fila[4] << endl;
+                    cout << "Fecha Ingreso: " << fila[5] << endl;
+                    cout << "--------------------------------------------\n";
+                }
+                mysql_free_result(resultado);
+            }
+
+            // Mostrar detalles
+            string queryDetalle =
+                "SELECT p.producto, cd.cantidad, cd.precio_costo_unitario, "
+                "(cd.cantidad * cd.precio_costo_unitario) AS total "
+                "FROM compras_detalle cd "
+                "JOIN productos p ON cd.idProducto = p.idProducto "
+                "WHERE cd.idCompra = " + to_string(idCompra) + ";";
+
+            if (!mysql_query(cn.getConector(), queryDetalle.c_str())) {
+                resultadoDetalle = mysql_store_result(cn.getConector());
+                double totalGeneral = 0.0;
+
+                cout << left << setw(20) << "Producto" << setw(10) << "Cant." << setw(15) << "P. Unitario" << setw(10) << "Total" << endl;
+                cout << "--------------------------------------------\n";
+
+                while ((filaDetalle = mysql_fetch_row(resultadoDetalle))) {
+                    double subtotal = atof(filaDetalle[3]);
+                    totalGeneral += subtotal;
+                    cout << left << setw(20) << filaDetalle[0]
+                        << setw(10) << filaDetalle[1]
+                        << setw(15) << filaDetalle[2]
+                        << setw(10) << filaDetalle[3] << endl;
+                }
+                cout << "--------------------------------------------\n";
+                cout << right << setw(35) << "TOTAL: Q " << totalGeneral << endl;
+                cout << "============================================\n";
+
+                mysql_free_result(resultadoDetalle);
+            }
+
+            cn.cerrar_conexion();
+        }
+        else {
+            cout << "Error al conectar para imprimir la factura.\n";
         }
     }
 
@@ -77,12 +200,12 @@ public:
                 "FROM compras c "
                 "JOIN proveedores p ON c.idProveedor = p.idProveedor "
                 "ORDER BY c.fechaingreso DESC;";
-            cout << "________________Datos de las Ventas__________________\n";
+            cout << "________________Datos de las Compras__________________\n";
             if (!mysql_query(cn.getConector(), query.c_str())) {
                 resultado = mysql_store_result(cn.getConector());
                 while ((fila = mysql_fetch_row(resultado))) {
-                    cout 
-                        <<"\n-------------------------------------------------------------------\n" 
+                    cout
+                        << "\n-------------------------------------------------------------------\n"
                         << "\nID Compra: " << fila[0]
                         << ", Orden: " << fila[1]
                         << ", Fecha Orden: " << fila[2]
@@ -90,7 +213,6 @@ public:
                         << ", Ingreso: " << fila[4]
                         << endl;
 
-                    // Detalles
                     string queryDetalle =
                         "SELECT cd.idProducto, p.producto, cd.cantidad, cd.precio_costo_unitario "
                         "FROM compras_detalle cd "
@@ -120,24 +242,21 @@ public:
         }
     }
 
-
     void actualizarCompraConDetalle() {
         ConexionBD cn;
         cn.abrir_conexion();
         if (cn.getConector()) {
-            // 1. Actualizar datos principales de la compra
-            string query = "UPDATE compras SET no_orden_compra = " + to_string(noOrdenCompra) +
-                ", idProveedor = " + to_string(idProveedor) +
-                ", fecha_orden = '" + fechaOrden + "' " +
+            string query = "UPDATE compras SET " +
+                string("idProveedor = ") + to_string(idProveedor) +
+                ", fecha_orden = now() " +
                 "WHERE idCompra = " + to_string(idCompra) + ";";
+
 
             if (!mysql_query(cn.getConector(), query.c_str())) {
                 cout << "\nCompra actualizada correctamente.\n";
 
-                // 2. Borrar detalles viejos para insertar los nuevos
                 string borrarDetalles = "DELETE FROM compras_detalle WHERE idCompra = " + to_string(idCompra) + ";";
                 if (!mysql_query(cn.getConector(), borrarDetalles.c_str())) {
-
                     int cantidadDetalles;
                     cout << "Ingrese la nueva cantidad de productos: ";
                     cin >> cantidadDetalles;
@@ -178,9 +297,6 @@ public:
         }
     }
 
-
-
-    // Eliminar compra con detalles
     void eliminarCompraConDetalle() {
         ConexionBD cn;
         cn.abrir_conexion();
@@ -199,6 +315,3 @@ public:
         }
     }
 };
-   
-
-
