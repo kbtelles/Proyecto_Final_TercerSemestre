@@ -300,7 +300,7 @@ public:
 
                     cout << "¿Desea agregar otro producto? (s/n): ";
                     cin >> respuesta;
-                }
+                }imprimirFactura(cn.getConector(), idVenta);
             }
             else {
                 cout << "Error al crear venta: " << mysql_error(cn.getConector()) << endl;
@@ -311,6 +311,7 @@ public:
             cout << "Fallo la conexion a la base de datos.\n";
         }
     }
+
 
     void buscarClientePorNitYCrearSiNoExiste() {
         Clientes cliente;
@@ -426,6 +427,64 @@ public:
             cn.cerrar_conexion();
         }
     }
+
+    void imprimirFactura(MYSQL* con, int idVentaFactura) {
+        string queryVenta =
+            "SELECT v.nofactura, v.serie, v.fechafactura, c.nombres, c.apellidos, c.nit "
+            "FROM ventas v "
+            "JOIN clientes c ON v.idCliente = c.idCliente "
+            "WHERE v.idVenta = " + to_string(idVentaFactura) + ";";
+
+        if (!mysql_query(con, queryVenta.c_str())) {
+            MYSQL_RES* resVenta = mysql_store_result(con);
+            MYSQL_ROW rowVenta = mysql_fetch_row(resVenta);
+
+            if (rowVenta) {
+                cout << "\n\n========== FACTURA ==========\n";
+                cout << "Factura No: " << rowVenta[0] << "\n";
+                cout << "Serie: " << rowVenta[1] << "\n";
+                cout << "Fecha: " << rowVenta[2] << "\n";
+                cout << "Cliente: " << rowVenta[3] << " " << rowVenta[4] << "\n";
+                cout << "NIT: " << rowVenta[5] << "\n";
+                cout << "------------------------------\n";
+                mysql_free_result(resVenta);
+            }
+
+            string queryDetalle =
+                "SELECT p.producto, vd.cantidad, vd.precio_unitario, (vd.cantidad * vd.precio_unitario) AS total "
+                "FROM ventas_detalle vd "
+                "JOIN productos p ON vd.idProducto = p.idProducto "
+                "WHERE vd.idVenta = " + to_string(idVentaFactura) + ";";
+
+            if (!mysql_query(con, queryDetalle.c_str())) {
+                MYSQL_RES* resDetalle = mysql_store_result(con);
+                MYSQL_ROW rowDetalle;
+                double totalFactura = 0.0;
+
+                cout << "Detalle de productos:\n";
+                cout << "Producto\tCant.\tPrecio\tSubtotal\n";
+                while ((rowDetalle = mysql_fetch_row(resDetalle))) {
+                    double subtotal = stod(rowDetalle[3]);
+                    totalFactura += subtotal;
+
+                    cout << rowDetalle[0] << "\t" << rowDetalle[1]
+                        << "\t" << rowDetalle[2] << "\t" << subtotal << "\n";
+                }
+                mysql_free_result(resDetalle);
+
+                cout << "------------------------------\n";
+                cout << "TOTAL: Q" << totalFactura << "\n";
+                cout << "==============================\n\n";
+            }
+            else {
+                cout << "Error al obtener detalles de la factura: " << mysql_error(con) << endl;
+            }
+        }
+        else {
+            cout << "Error al obtener datos de la venta: " << mysql_error(con) << endl;
+        }
+    }
+
 
     void actualizarVenta() {
         ConexionBD cn;
