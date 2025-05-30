@@ -46,8 +46,8 @@ class Ventas {
 
 private:
     int idVenta = 0;
-    int noFactura, idCliente, idEmpleado, nitCliente;
-    string serie, fechaFactura;
+    int noFactura, idCliente, idEmpleado;
+    string serie, fechaFactura, nitCliente;
 
 public:
     // Setters
@@ -56,7 +56,7 @@ public:
     void setSerie(string s) { serie = s; }
     void setFechaFactura(string f) { fechaFactura = f; }
     void setIdCliente(int c) { idCliente = c; }
-    void setNitCliente(int nc) { nitCliente = nc; }
+    void setNitCliente(string nc) { nitCliente = nc; }
     void setIdEmpleado(int e) { idEmpleado = e; }
 
 
@@ -111,6 +111,22 @@ public:
         }
     }
 
+    void mostrarProductos(MYSQL* con) {
+        string query = "SELECT idProducto, producto, existencia FROM productos;";
+        if (!mysql_query(con, query.c_str())) {
+            MYSQL_RES* res = mysql_store_result(con);
+            MYSQL_ROW row;
+            cout << "\n----- PRODUCTOS DISPONIBLES -----\n";
+            while ((row = mysql_fetch_row(res))) {
+                cout << "ID: " << row[0] << ", Nombre: " << row[1] << ",Existencia: " << row[2]<< " " << row[3] << endl;
+            }
+            mysql_free_result(res);
+        }
+        else {
+            cout << "Error al mostrar productos: " << mysql_error(con) << endl;
+        }
+    }
+
 
 
     void crearVentaConDetalle() {
@@ -134,25 +150,94 @@ public:
 
             // Verificar si el NIT existe en la tabla de clientes
             string consultaNIT = "SELECT idCliente FROM clientes WHERE nit = '" + nit + "';";
-            if (mysql_query(cn.getConector(), consultaNIT.c_str())) {
-                cout << "Error al verificar NIT: " << mysql_error(cn.getConector()) << endl;
-                cn.cerrar_conexion();
-                return;
-            }
+            int idClienteLocal = 0;
+            string nitNormalizado = nit;
+            transform(nitNormalizado.begin(), nitNormalizado.end(), nitNormalizado.begin(), ::toupper);
 
-            MYSQL_RES* resultadoNIT = mysql_store_result(cn.getConector());
-            if (resultadoNIT == nullptr || mysql_num_rows(resultadoNIT) == 0) {
-                cout << "El NIT ingresado no está registrado. Operación cancelada.\n";
-                if (resultadoNIT) mysql_free_result(resultadoNIT);
-                cn.cerrar_conexion();
-                return;
+            string consultaCliente;
+
+            if (nitNormalizado == "CF" || nitNormalizado == "C/F") {
+                // Buscar si ya existe un cliente "C/F"
+                consultaCliente = "SELECT idCliente FROM clientes WHERE UPPER(nit) IN ('C/F', 'CF');";
+
+                if (!mysql_query(cn.getConector(), consultaCliente.c_str())) {
+                    MYSQL_RES* res = mysql_store_result(cn.getConector());
+                    MYSQL_ROW row = mysql_fetch_row(res);
+
+                    if (row) {
+                        idClienteLocal = stoi(row[0]);
+                        mysql_free_result(res);
+                        cout << "Cliente 'Consumidor Final' encontrado con ID: " << idClienteLocal << endl;
+                    }
+                    else {
+                        // Crear cliente genérico "C/F"
+                        string insertar = "INSERT INTO clientes (nombres, apellidos, nit, genero, telefono, correo_electronico, fechaingreso) "
+                            "VALUES ('Consumidor', 'Final', 'C/F', 1, '00000000', 'cf@email.com', NOW());";
+                        if (!mysql_query(cn.getConector(), insertar.c_str())) {
+                            idClienteLocal = mysql_insert_id(cn.getConector());
+                            cout << "Cliente 'Consumidor Final' creado con ID: " << idClienteLocal << endl;
+                        }
+                        else {
+                            cout << "Error al crear cliente genérico: " << mysql_error(cn.getConector()) << endl;
+                            cn.cerrar_conexion();
+                            return;
+                        }
+                    }
+                }
+                else {
+                    cout << "Error al buscar cliente genérico: " << mysql_error(cn.getConector()) << endl;
+                    cn.cerrar_conexion();
+                    return;
+                }
             }
             else {
-                MYSQL_ROW fila = mysql_fetch_row(resultadoNIT);
-                nitCliente = stoi(fila[0]);  // Recuperamos idCliente desde la base de datos
-                mysql_free_result(resultadoNIT);
+                // Buscar si el NIT ya está registrado
+                consultaCliente = "SELECT idCliente FROM clientes WHERE nit = '" + nit + "';";
+                if (!mysql_query(cn.getConector(), consultaCliente.c_str())) {
+                    MYSQL_RES* res = mysql_store_result(cn.getConector());
+                    if (mysql_num_rows(res) > 0) {
+                        MYSQL_ROW row = mysql_fetch_row(res);
+                        idClienteLocal = stoi(row[0]);
+                        mysql_free_result(res);
+                        cout << "Cliente encontrado con ID: " << idClienteLocal << endl;
+                    }
+                    else {
+                        mysql_free_result(res);
+                        // Crear nuevo cliente solicitando datos
+                        string nombres, apellidos, telefono, correo;
+                        bool genero;
+                        cin.ignore();
+                        cout << "Cliente no encontrado. Ingrese datos para nuevo cliente:\n";
+                        cout << "Nombres: "; getline(cin, nombres);
+                        cout << "Apellidos: "; getline(cin, apellidos);
+                        cout << "Genero (1=Masculino, 0=Femenino): "; cin >> genero; cin.ignore();
+                        cout << "Telefono: "; getline(cin, telefono);
+                        cout << "Correo: "; getline(cin, correo);
+
+                        string insertar = "INSERT INTO clientes (nombres, apellidos, nit, genero, telefono, correo_electronico, fechaingreso) VALUES ('" +
+                            nombres + "', '" + apellidos + "', '" + nit + "', " + to_string(genero) + ", '" + telefono + "', '" + correo + "', NOW());";
+
+                        if (!mysql_query(cn.getConector(), insertar.c_str())) {
+                            idClienteLocal = mysql_insert_id(cn.getConector());
+                            cout << "Nuevo cliente creado con ID: " << idClienteLocal << endl;
+                        }
+                        else {
+                            cout << "Error al insertar nuevo cliente: " << mysql_error(cn.getConector()) << endl;
+                            cn.cerrar_conexion();
+                            return;
+                        }
+                    }
+                }
+                else {
+                    cout << "Error al buscar cliente: " << mysql_error(cn.getConector()) << endl;
+                    cn.cerrar_conexion();
+                    return;
+                }
             }
 
+            // Asignar ID cliente y NIT al objeto
+            idCliente = idClienteLocal;
+            nitCliente = nit;
 
             mostrarEmpleados(cn.getConector());
             cout << "\nIngrese ID Empleado: ";
@@ -164,10 +249,9 @@ public:
             noFactura = generarNoFactura(cn.getConector());
             serie = generarSerie(noFactura);
 
-            string query = "INSERT INTO ventas(nofactura, serie, fechafactura, idCliente, idEmpleado, fechaingreso, nit_cliente) VALUES (" +
+            string query = "INSERT INTO ventas (noFactura, serie, fechafactura, idCliente, idEmpleado, fechaingreso) VALUES (" +
                 to_string(noFactura) + ", '" + serie + "', now(), " +
-                to_string(nitCliente) + ", " + to_string(idEmpleado) + ", now(), '" + nit + "');";
-
+                to_string(idClienteLocal) + ", " + to_string(idEmpleado) + ", now());";
 
             if (!mysql_query(cn.getConector(), query.c_str())) {
                 idVenta = mysql_insert_id(cn.getConector());
@@ -178,7 +262,7 @@ public:
                 while (respuesta == 's' || respuesta == 'S') {
                     int idProducto;
                     int cantidad;
-
+                    mostrarProductos(cn.getConector());
                     cout << "\nID Producto: ";
                     cin >> idProducto;
 
