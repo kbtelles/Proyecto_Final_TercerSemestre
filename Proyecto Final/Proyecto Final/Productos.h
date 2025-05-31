@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "ConexionBD.h"
 #include <iostream>
 #include <mysql.h>
@@ -68,7 +68,7 @@ public:
             }
         }
         else {
-            cout << "Error en la conexión a la base de datos.\n";
+            cout << "Error en la conexiÃ³n a la base de datos.\n";
         }
         cn.cerrar_conexion();
     }
@@ -93,7 +93,7 @@ public:
                 cout << "\nID: " << fila[0]
                     << ", Producto: " << fila[1]
                     << ", Marca: " << fila[2]
-                    << ", Descripción: " << fila[3]
+                    << ", DescripciÃ³n: " << fila[3]
                     << ", Imagen: " << fila[4]
                     << ", Precio Costo: " << fila[5]
                     << ", Precio Venta: " << fila[6]
@@ -103,7 +103,7 @@ public:
             }
         }
         else {
-            cout << "Error en la conexión.\n";
+            cout << "Error en la conexiÃ³n.\n";
         }
         cn.cerrar_conexion();
     }
@@ -128,7 +128,7 @@ public:
             }
         }
         else {
-            cout << "Error en la conexión.\n";
+            cout << "Error en la conexiÃ³n.\n";
         }
         cn.cerrar_conexion();
     }
@@ -150,9 +150,9 @@ public:
             }
         }
         else {
-            cout << "Error en la conexión.\n";
+            cout << "Error en la conexiÃ³n.\n";
         }
         cn.cerrar_conexion();
     }
-};
-
+    };
+    

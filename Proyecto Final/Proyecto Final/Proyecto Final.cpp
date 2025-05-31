@@ -5,15 +5,23 @@
 #include "Proveedor.h"
 #include "Productos.h"
 #include "marcas.h"
+#include <cstdlib>  // para system()
 #include "Ventas.h"
 #include "Compras.h"
 
 using namespace std;
+void limpiarPantalla() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
 
 void menuPuestos() {
     Puestos p;
     int opcion = 0;
-
+    limpiarPantalla();
     do {
         cout << "\n--- Menu de Puestos ---\n";
         cout << "1. Crear\n2. Leer\n3. Actualizar\n4. Borrar\n5. Salir\n";
@@ -23,6 +31,7 @@ void menuPuestos() {
 
         switch (opcion) {
         case 1: {
+            limpiarPantalla();
             int idPuestos;
             string Puesto;
             cout << "Puesto: "; getline(cin, Puesto);
@@ -32,10 +41,11 @@ void menuPuestos() {
             p.crear();
             break;
         }
-        case 2:
+        case 2: limpiarPantalla();
             p.leer();
             break;
         case 3: {
+            limpiarPantalla();
             int idPuestos;
             string Puesto;
             cout << "ID del puesto a actualizar: "; cin >> idPuestos; cin.ignore();
@@ -47,13 +57,14 @@ void menuPuestos() {
             break;
         }
         case 4: {
+            limpiarPantalla();
             int idPuestos;
             cout << "ID del puesto a eliminar: "; cin >> idPuestos; cin.ignore();
             p.setIdPuesto(idPuestos);
             p.borrar();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             cout << "Saliendo del menu de proveedores...\n";
             break;
         default:
@@ -94,7 +105,9 @@ void mostrarPuestos() {
 void menuEmpleados() {
     Empleados e;
     int opcion = 0;
+    limpiarPantalla();
     do {
+        
         cout << "\n--- Menu Empleados ---\n";
         cout << "1. Crear\n2. Leer\n3. Actualizar\n4. Borrar\n5. Salir\n";
         cout << "Ingrese una opcion: ";
@@ -103,6 +116,7 @@ void menuEmpleados() {
 
         switch (opcion) {
         case 1: {
+            limpiarPantalla();
             string nombres, apellidos, direccion, telefono, DPI, FechaNacimiento, FechaInicioLabores, FechaIngreso;
             bool genero;
             short idPuestos;
@@ -125,10 +139,11 @@ void menuEmpleados() {
             e.crear();
             break;
         }
-        case 2:
+        case 2: limpiarPantalla();
             e.leer();
             break;
         case 3: {
+            limpiarPantalla();
             int IdEmpleado;
             string nombres, apellidos, direccion, telefono, DPI, FechaNacimiento, FechaInicioLabores, FechaIngreso;
             bool genero;
@@ -165,13 +180,14 @@ void menuEmpleados() {
             break;
         }
         case 4: {
+            limpiarPantalla();
             int IdEmpleado;
             cout << "Ingrese el ID a eliminar: "; cin >> IdEmpleado; cin.ignore();
             e.setId_empleado(IdEmpleado);
             e.borrar();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             cout << "Saliendo del menu de empleados...\n";
             break;
         default:
@@ -183,8 +199,10 @@ void menuEmpleados() {
 void menuClientes() {
     Clientes c;
     int opcion = 0;
+    limpiarPantalla();
 
     do {
+       
         cout << "\n--- Menu Clientes ---\n";
         cout << "1. Crear\n2. Busqueda\n3. Actualizar\n4. Borrar\n5. Salir\n";
         cout << "Ingrese una opcion: ";
@@ -193,6 +211,7 @@ void menuClientes() {
 
         switch (opcion) {
         case 1: {
+            limpiarPantalla();
             string nombres, apellidos, NIT, telefono, correo, fecha;
             bool genero;
             cout << "Nombres: "; getline(cin, nombres);
@@ -206,10 +225,11 @@ void menuClientes() {
             c.crear();
             break;
         }
-        case 2:
+        case 2: limpiarPantalla();
             c.leer();
             break;
         case 3: {
+            limpiarPantalla();
             int id;
             string nombres, apellidos, NIT, telefono, correo, fecha;
             bool genero;
@@ -233,13 +253,14 @@ void menuClientes() {
             break;
         }
         case 4: {
+            limpiarPantalla();
             int id;
             cout << "ID del cliente a eliminar: "; cin >> id; cin.ignore();
             c.setIdCliente(id);
             c.borrar();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             cout << "Saliendo del menu de clientes...\n";
             break;
         default:
@@ -251,8 +272,9 @@ void menuClientes() {
 void menuProveedores() {
     Proveedores p;
     int opcion = 0;
-
+    limpiarPantalla();
     do {
+        
         cout << "\n--- Menu Proveedores ---\n";
         cout << "1. Crear\n2. Leer\n3. Actualizar\n4. Borrar\n5. Salir\n";
         cout << "Ingrese una opcion: ";
@@ -261,6 +283,7 @@ void menuProveedores() {
 
         switch (opcion) {
         case 1: {
+            limpiarPantalla();
             string proveedor, nit, direccion, telefono;
             cout << "Proveedor: "; getline(cin, proveedor);
             cout << "NIT: "; getline(cin, nit);
@@ -271,10 +294,11 @@ void menuProveedores() {
             p.crear();
             break;
         }
-        case 2:
+        case 2: limpiarPantalla();
             p.leer();
             break;
         case 3: {
+            limpiarPantalla();
             int id;
             string proveedor, nit, direccion, telefono;
             cout << "ID del proveedor a actualizar: "; cin >> id; cin.ignore();
@@ -292,13 +316,14 @@ void menuProveedores() {
             break;
         }
         case 4: {
+            limpiarPantalla();
             int id;
             cout << "ID del proveedor a eliminar: "; cin >> id; cin.ignore();
             p.setIdProveedor(id);
             p.borrar();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             cout << "Saliendo del menu de proveedores...\n";
             break;
         default:
@@ -310,6 +335,7 @@ void menuProveedores() {
 void menuMarcas() {
     Marcas marca;
     int opcion = 0;
+    limpiarPantalla();
 
     do {
         cout << "\n--- Menu Marcas ---\n";
@@ -320,6 +346,7 @@ void menuMarcas() {
 
         switch (opcion) {
         case 1: {
+            limpiarPantalla();
             string nombreMarca;
             cout << "Nombre de la Marca: ";
             getline(cin, nombreMarca);
@@ -327,10 +354,11 @@ void menuMarcas() {
             marca.crear();
             break;
         }
-        case 2:
+        case 2: limpiarPantalla();
             marca.leer();
             break;
         case 3: {
+            limpiarPantalla();
             int id;
             string nombreMarca;
             cout << "ID de la Marca a actualizar: ";
@@ -344,6 +372,7 @@ void menuMarcas() {
             break;
         }
         case 4: {
+            limpiarPantalla();
             int id;
             cout << "ID de la Marca a eliminar: ";
             cin >> id;
@@ -352,7 +381,7 @@ void menuMarcas() {
             marca.borrar();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             cout << "Saliendo del menu de marcas...\n";
             break;
         default:
@@ -392,6 +421,7 @@ void mostrarTablaMarcas() {
 void menuProductos() {
     Productos prod;
     int opcion = 0;
+    limpiarPantalla();
 
     do {
         cout << "\n--- Menu Productos ---\n";
@@ -402,6 +432,7 @@ void menuProductos() {
 
         switch (opcion) {
         case 1: {
+            limpiarPantalla();
             string producto, descripcion, imagen, fecha_ingreso;
             int idMarca, existencias;
             double precio_costo, precio_venta;
@@ -419,10 +450,11 @@ void menuProductos() {
             prod.crear();
             break;
         }
-        case 2:
+        case 2: limpiarPantalla();
             prod.leer();
             break;
         case 3: {
+            limpiarPantalla();
             int id, idMarca, existencias;
             string producto, descripcion, imagen, fecha_ingreso;
             double precio_costo, precio_venta;
@@ -450,13 +482,14 @@ void menuProductos() {
             break;
         }
         case 4: {
+            limpiarPantalla();
             int id;
             cout << "ID del producto a eliminar: "; cin >> id; cin.ignore();
             prod.setIdProducto(id);
             prod.borrar();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             cout << "Saliendo del menu de productos...\n";
             break;
         default:
@@ -470,7 +503,10 @@ void menuVentas() {
     Ventas venta;
     int opcion = 0;
 
+
+    limpiarPantalla();
     do {
+       
         cout << "\n--- Menu Ventas ---\n";
         cout << "1. Crear Venta con Detalle\n";
         cout << "2. Leer Ventas\n";
@@ -484,41 +520,44 @@ void menuVentas() {
 
         switch (opcion) {
         case 1: {
-  
             venta.crearVentaConDetalle();
             break;
+           
         }
-        case 2:
+        case 2:limpiarPantalla();
             venta.leerVentas();
             break;
-        case 3:
+        case 3: limpiarPantalla();
             venta.actualizarVenta();  
             break;
-        case 4: {
+        case 4: { limpiarPantalla();
+            
             int id;
             cout << "ID de la venta a eliminar: "; cin >> id; cin.ignore();
             venta.setIdVenta(id);
             venta.eliminarVentaConDetalle();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             venta.buscarClientePorNitYCrearSiNoExiste();
             break;
-        case 6:
+        case 6: limpiarPantalla();
             cout << "Saliendo del menu de ventas...\n";
             break;
         
         default:
             cout << "Opcion invalida. Intente nuevamente.\n";
         }
-    } while (opcion != 5);
+    } while (opcion != 6);
 }
 
 void menuCompras() {
     Compras compra;
     int opcion = 0;
-
+    limpiarPantalla();
+  
     do {
+
         cout << "\n--- Menu Compras ---\n";
         cout << "1. Crear Compra con Detalle\n";
         cout << "2. Leer Compras\n";
@@ -531,6 +570,7 @@ void menuCompras() {
 
         switch (opcion) {
         case 1: {
+            limpiarPantalla();
             int noOrden, proveedor;
             string fecha;
 
@@ -543,10 +583,11 @@ void menuCompras() {
             compra.crearCompraConDetalle();
             break;
         }
-        case 2:
+        case 2:limpiarPantalla();
             compra.leerCompras();
             break;
         case 3: {
+            limpiarPantalla();
             int id;
             cout << "ID de la compra a eliminar: "; cin >> id; cin.ignore();
             compra.setIdCompra(id);
@@ -554,6 +595,7 @@ void menuCompras() {
             break;
         }
         case 4: {
+            limpiarPantalla();
             int id, noOrden, proveedor;
             string fecha;
 
@@ -570,7 +612,7 @@ void menuCompras() {
             compra.actualizarCompraConDetalle();
             break;
         }
-        case 5:
+        case 5: limpiarPantalla();
             cout << "Saliendo del menú de compras...\n";
             break;
         default:
@@ -634,6 +676,7 @@ void buscarClientePorNitYCrearSiNoExiste() {
 int main() {
     int opcionPrincipal = 0;
     do {
+  
         cout << "\n--- Menu Principal ---\n";
         cout << "1. Puestos\n2. Empleados\n3. Clientes\n4. Proveedores\n5. Marcas\n6. Productos\n7. Ventas\n8. Compras\n9. Salir\n";
         cout << "Seleccione una opcion: ";
@@ -671,7 +714,7 @@ int main() {
         default:
             cout << "Opcion invalida\n";
         }
-    } while (opcionPrincipal != 10);
+    } while (opcionPrincipal != 9);
 
     return 0;
 }

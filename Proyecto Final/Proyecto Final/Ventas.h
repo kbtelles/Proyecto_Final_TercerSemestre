@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "ConexionBD.h"
 #include <iostream>
 #include <mysql.h>
@@ -9,7 +9,7 @@
 using namespace std;
 
 inline bool validarNIT(string nit) {
-    // Eliminar espacios y convertir a mayúsculas
+    // Eliminar espacios y convertir a mayÃºsculas
     nit.erase(remove(nit.begin(), nit.end(), ' '), nit.end());
     transform(nit.begin(), nit.end(), nit.begin(), ::toupper);
 
@@ -48,6 +48,7 @@ private:
     int idVenta = 0;
     int noFactura, idCliente, idEmpleado;
     string serie, fechaFactura, nitCliente;
+    int idProducto;
 
 public:
     // Setters
@@ -127,13 +128,27 @@ public:
         }
     }
 
+    void actualizarInventario(MYSQL* con, int idProducto, int cantidadVendida) {
+        string consulta = "UPDATE productos SET existencia = existencia - " + to_string(cantidadVendida) +
+            " WHERE idProducto = " + to_string(idProducto) + ";";
+
+        if (mysql_query(con, consulta.c_str()) == 0) {
+            cout << "âœ… Inventario actualizado correctamente.\n";
+        }
+        else {
+            cout << "âŒ Error al actualizar inventario: " << mysql_error(con) << endl;
+        }
+    }
+
 
 
     void crearVentaConDetalle() {
         ConexionBD cn;
         cn.abrir_conexion();
 
-        if (cn.getConector()) {
+        if (cn.getConector()) {{
+    }
+
             mostrarClientes(cn.getConector());
             //cout << "\nIngrese NIT Cliente: ";
             //cin >> nitCliente;
@@ -170,7 +185,7 @@ public:
                         cout << "Cliente 'Consumidor Final' encontrado con ID: " << idClienteLocal << endl;
                     }
                     else {
-                        // Crear cliente genérico "C/F"
+                        // Crear cliente genÃ©rico "C/F"
                         string insertar = "INSERT INTO clientes (nombres, apellidos, nit, genero, telefono, correo_electronico, fechaingreso) "
                             "VALUES ('Consumidor', 'Final', 'C/F', 1, '00000000', 'cf@email.com', NOW());";
                         if (!mysql_query(cn.getConector(), insertar.c_str())) {
@@ -178,20 +193,20 @@ public:
                             cout << "Cliente 'Consumidor Final' creado con ID: " << idClienteLocal << endl;
                         }
                         else {
-                            cout << "Error al crear cliente genérico: " << mysql_error(cn.getConector()) << endl;
+                            cout << "Error al crear cliente genÃ©rico: " << mysql_error(cn.getConector()) << endl;
                             cn.cerrar_conexion();
                             return;
                         }
                     }
                 }
                 else {
-                    cout << "Error al buscar cliente genérico: " << mysql_error(cn.getConector()) << endl;
+                    cout << "Error al buscar cliente genÃ©rico: " << mysql_error(cn.getConector()) << endl;
                     cn.cerrar_conexion();
                     return;
                 }
             }
             else {
-                // Buscar si el NIT ya está registrado
+                // Buscar si el NIT ya estÃ¡ registrado
                 consultaCliente = "SELECT idCliente FROM clientes WHERE nit = '" + nit + "';";
                 if (!mysql_query(cn.getConector(), consultaCliente.c_str())) {
                     MYSQL_RES* res = mysql_store_result(cn.getConector());
@@ -284,7 +299,9 @@ public:
 
                             if (!mysql_query(cn.getConector(), detalleQuery.c_str())) {
                                 cout << "Detalle agregado correctamente.\n";
+                                actualizarInventario(cn.getConector(), idProducto, cantidad);
                             }
+
                             else {
                                 cout << "Error al insertar detalle: " << mysql_error(cn.getConector()) << endl;
                             }
@@ -298,7 +315,7 @@ public:
                         cout << "Error consultando producto: " << mysql_error(cn.getConector()) << endl;
                     }
 
-                    cout << "¿Desea agregar otro producto? (s/n): ";
+                    cout << "Â¿Desea agregar otro producto? (s/n): ";
                     cin >> respuesta;
                 }imprimirFactura(cn.getConector(), idVenta);
             }
@@ -356,7 +373,7 @@ public:
                 cliente.crear();
             }
             else {
-                cout << "No se creó ningún cliente.\n";
+                cout << "No se creÃ³ ningÃºn cliente.\n";
             }
         }
     }
