@@ -1,51 +1,51 @@
 ﻿  Compras.cpp
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Compras.h(66,43): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Compras.h(66,43): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Compras.cpp")
   
   Proyecto Final.cpp
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Puestos.h(45,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Puestos.h(45,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Empleados.h(86,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Empleados.h(86,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Clientes.h(93,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Clientes.h(93,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Proveedor.h(49,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Proveedor.h(49,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Productos.h(63,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Productos.h(65,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\marcas.h(36,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\marcas.h(36,24): warning C4244: 'inicializando': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(29,16): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(29,16): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(136,21): warning C4566: el carácter representado por el nombre de carácter universal '\u2705' no se puede representar en la página de códigos actual (1252)
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(136,21): warning C4566: el carácter representado por el nombre de carácter universal '\u2705' no se puede representar en la página de códigos actual (1252)
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(139,21): warning C4566: el carácter representado por el nombre de carácter universal '\u274C' no se puede representar en la página de códigos actual (1252)
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(139,21): warning C4566: el carácter representado por el nombre de carácter universal '\u274C' no se puede representar en la página de códigos actual (1252)
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(192,61): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(192,61): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(236,61): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(236,61): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(272,42): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Ventas.h(272,42): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Compras.h(66,43): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Compras.h(66,43): warning C4244: '=': conversión de 'uint64_t' a 'int'; posible pérdida de datos
   (compilando archivo de origen "Proyecto%20Final.cpp")
   
-C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Proyecto Final.cpp(35,17): warning C4101: 'idPuestos': variable local sin referencia
+C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\Proyecto Final\Proyecto Final.cpp(36,17): warning C4101: 'idPuestos': variable local sin referencia
   Generando código
-  0 of 374 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  2 of 376 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Proyecto Final.vcxproj -> C:\Users\alexh\Desktop\Proyecto_Final_TercerSemestre\Proyecto Final\x64\Release\Proyecto Final.exe
+  Proyecto Final.vcxproj -> C:\Users\gmayl\OneDrive\Desktop\PROYECTO PROGRA\Proyecto_Final_TercerSemestre\Proyecto Final\x64\Release\Proyecto Final.exe

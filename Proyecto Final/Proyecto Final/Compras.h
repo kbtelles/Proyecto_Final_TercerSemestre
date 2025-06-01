@@ -107,16 +107,18 @@ public:
                         cout << "Error al insertar detalle: " << mysql_error(cn.getConector()) << endl;
                     }
                 }
-
+                leer_puerto();
                 // Imprimir factura al finalizar
                 imprimirFacturaCompra();
             }
             else {
+                
                 cout << "Error al crear compra: " << mysql_error(cn.getConector()) << endl;
             }
             cn.cerrar_conexion();
         }
         else {
+            //leer_puerto();
             cout << "Fallo la conexión a la base de datos.\n";
         }
     }
@@ -314,4 +316,67 @@ public:
             cn.cerrar_conexion();
         }
     }
+    int leer_puerto() {
+        HANDLE hSerial = CreateFile(
+            L"COM3",              // Nombre del puerto (cámbialo según el que use tu Arduino)
+            GENERIC_WRITE,       // Solo vamos a escribir en el puerto
+            0,                   // No compartimos el puerto
+            NULL,                // Seguridad predeterminada
+            OPEN_EXISTING,       // Abrir el puerto solo si ya existe
+            0,                   // Sin banderas adicionales
+            NULL);               // Sin plantilla de archivo
+
+        // 2. Verificamos si se abrió correctamente
+        if (hSerial == INVALID_HANDLE_VALUE) {
+            std::cerr << "Error abriendo el puerto COM" << std::endl;
+            return 1;  // Salir con código de error
+        }
+
+        // 3. Estructura para configurar el puerto serie
+        DCB dcbSerialParams = { 0 };              // Estructura para parámetros del puerto
+        dcbSerialParams.DCBlength = sizeof(dcbSerialParams);  // Tamaño de la estructura
+
+        // 4. Obtener configuración actual del puerto
+        if (!GetCommState(hSerial, &dcbSerialParams)) {
+            std::cerr << "No se pudo obtener la configuración del puerto" << std::endl;
+            CloseHandle(hSerial);  // Cerramos el puerto antes de salir
+            return 1;
+        }
+
+        // 5. Configurar parámetros del puerto (deben coincidir con Serial.begin(9600))
+        dcbSerialParams.BaudRate = CBR_9600;    // Velocidad de transmisión (baudios)
+        dcbSerialParams.ByteSize = 8;           // 8 bits por byte
+        dcbSerialParams.StopBits = ONESTOPBIT;  // 1 bit de parada
+        dcbSerialParams.Parity = NOPARITY;    // Sin paridad
+
+        // 6. Aplicamos la configuración
+        if (!SetCommState(hSerial, &dcbSerialParams)) {
+            std::cerr << "No se pudo configurar el puerto" << std::endl;
+            CloseHandle(hSerial);
+            return 1;
+        }
+
+        // 7. Configurar timeouts de escritura (opcional pero recomendable)
+        COMMTIMEOUTS timeouts = { 0 };
+        timeouts.WriteTotalTimeoutConstant = 50;  // Tiempo máximo total para escritura
+        SetCommTimeouts(hSerial, &timeouts);
+
+        // 8. Preparar el dato a enviar
+        DWORD bytesWritten;            // Variable que almacenará cuántos bytes se escribieron
+        char data[] = "1";             // Este es el carácter que enviamos al Arduino
+
+        // 9. Enviar el dato por el puerto serial
+        if (!WriteFile(hSerial, data, sizeof(data) - 1, &bytesWritten, NULL)) {
+            std::cerr << "Error escribiendo en el puerto" << std::endl;
+            CloseHandle(hSerial);
+            return 1;
+        }
+
+        // 10. Confirmar que el pulso fue enviado
+        std::cout << "Pulso enviado al Arduino." << std::endl;
+
+        // 11. Cerrar el puerto COM al terminar
+        CloseHandle(hSerial);
+
+    };
 };

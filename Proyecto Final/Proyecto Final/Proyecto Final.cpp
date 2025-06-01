@@ -8,6 +8,7 @@
 #include <cstdlib>  // para system()
 #include "Ventas.h"
 #include "Compras.h"
+#include <windows.h>
 
 using namespace std;
 void limpiarPantalla() {
